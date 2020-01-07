@@ -42,7 +42,7 @@ void buscar(int a[], int n, int m)
     cout << "Ingrese el nombre del archivo: ";
     getline(cin, elementos);
     archivo.open(elementos.c_str(), ios::out);
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < n; i++)
     {
         if (a[i]==m)
         {
