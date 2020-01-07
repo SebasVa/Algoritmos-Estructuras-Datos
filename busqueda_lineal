@@ -1,0 +1,76 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int tam = 100;
+
+void agregar(int a[], int n);
+void buscar(int a[], int n, int m);
+void imprimir(int a[], int n);
+void archivo(int a[]);
+
+int main()
+{
+    setlocale(LC_CTYPE,"spanish");
+    int a, b;
+    int Arreglo[tam];
+    cout << "Ingrese el tamaño del arreglo: ";
+    cin >> a;
+    cout << "Ingrese el numero a buscar: ";
+    cin >> b;
+    agregar(Arreglo,a);
+    buscar(Arreglo, a, b);
+    imprimir(Arreglo, a);
+    return 0;
+}
+
+void agregar(int a[], int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        cout << "Ingrese un nuemro: ";
+        cin >> a[i];
+    }
+}
+
+void buscar(int a[], int n, int m)
+{
+    bool c;
+    string elementos;
+    ofstream archivo;
+    cin.ignore();
+    cout << "Ingrese el nombre del archivo: ";
+    getline(cin, elementos);
+    archivo.open(elementos.c_str(), ios::out);
+    for(int i = 0; i < 5; i++)
+    {
+        if (a[i]==m)
+        {
+            cout << "Elemento encontrado"<< endl;
+            cout << "Posición: " << i+1 << endl;
+            archivo << "Elemento encontrado" << endl;
+            archivo << "Posición: " << i+1 << endl;
+            cout << endl;
+            c = true;
+        }
+    }
+    if(c == false)
+    {
+        archivo << " Elemento no encontrado ";
+        cout << " Elemento no encontrado ";
+    }
+    for(int i=0; i<n; i++)
+    {
+        archivo <<"| " << a[i] << " |";
+    }
+
+}
+
+void imprimir(int a[], int n)
+{
+    cout << "Elementos de arreglo : ";
+    for(int i=0; i<n; i++)
+    {
+        cout <<"| " << a[i] << " |";
+    }
+}
