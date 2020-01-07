@@ -1,0 +1,94 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void ingresar(string nomberarchivo);
+void mostrar(string nomberarchivo);
+int menu();
+
+int main() {
+
+	string  N_archivo;
+	cout << "Ingrese el nombre del archivo: ";
+	getline(cin, N_archivo);
+	int op = -1;
+	op = menu();
+
+	while (op != 3) {
+
+		switch(op){
+
+		 case 1:
+
+			ingresar(N_archivo);
+
+			break;
+
+		 case 2:
+
+			mostrar(N_archivo);
+
+			break;
+		}
+		op = menu();
+	}
+	
+	return 0;
+}
+
+void ingresar(string nomberarchivo) {
+
+	string nombre, apellido;
+	ofstream archivo_P;
+	int edad;
+	char r;
+	archivo_P.open(nomberarchivo.c_str(), ios::out);
+	do {
+		cout << "\tIngrese su nombre: ";
+		getline(cin, nombre, '\n');
+
+		cout << "\tIngrese su apellido: ";
+		getline(cin, apellido, '\n');
+
+		cout << "\tIngrese su edad: ";
+		cin >> edad;
+
+		archivo_P << nombre << " " << apellido << " " << edad << "\n";
+		cout << "Desea ingresar otro contacto s/n" << endl;
+		cin >> r;
+		cin.ignore();
+		
+	} while (r == 's');
+	archivo_P.close();
+}
+
+void mostrar(string nomberarchivo) {
+
+	string nom, ape, ed;
+	ifstream archivo_L(nomberarchivo);
+	string texto;
+	while (!archivo_L.eof()) {
+		archivo_L >> nom >> ape >> ed;
+		if (!archivo_L.eof()) {
+			getline(archivo_L, texto);
+			cout << "Nombre: " << nom << endl;
+			cout << "Apellido: " << ape << endl;
+			cout << "Edad: " << ed<< endl;
+		}
+	}
+	archivo_L.close();
+}
+
+int menu() {
+	int op = -1;
+	while ((op < 0) || (op > 3)) {
+		cout << "1.- ingresar contactos" << endl;
+		cout << "2.- mostrar contactos" << endl;
+		cout << "3.- salir" << endl;
+		cout << "escoga una opcion: ";
+		cin >> op;
+		cout << endl;
+	}
+	return op;
+}
