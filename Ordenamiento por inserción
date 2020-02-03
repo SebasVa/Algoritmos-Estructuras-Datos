@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+const int N = 100;
+void ingresar(int a[], int n);
+void ordenar(int a[], int n);
+void imprimir(int a[], int n);
+
+int main() {
+	setlocale(LC_CTYPE, "spanish");
+	int a[N];
+	int m;
+	cout << "Ingreses el tamaño del arreglo: ";
+	cin >> m;
+	ingresar(a, m);
+	ordenar(a, m);
+	imprimir(a, m);
+	return 0;
+}
+void ingresar(int a[], int n) {
+	for (int i = 0; i < n; i++) {
+		cout << "Ingrese un valor: ";
+		cin >> a[i];
+	}
+}
+void ordenar(int a[], int n) {
+	int i, pos, aux;
+	for (int i = 0; i < n; i++) {
+		pos = i;
+		aux = a[i];
+		while ((pos > 0) && (a[pos - 1] > aux)) {
+			a[pos] = a[pos - 1];
+			pos--;
+		}
+		a[pos] = aux;
+	}
+}
+void imprimir(int a[], int n) {
+	for (int i = 0; i < n; i++) {
+		cout << "|" << a[i] << "|";
+	}
+}
